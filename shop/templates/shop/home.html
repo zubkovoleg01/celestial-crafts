@@ -1,0 +1,55 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <div class="text">
+        <h1 class="jewelry">HIGH JEWELRY</h1>
+        <p class="descr">Exquisite jewelry for inspirational moments of life.</p>
+        <img class="line" src="{% static 'shop/images/Line.png' %}">
+        <a class="view-products" href="{% url 'shop:products' %}">See collection</a>
+    </div>
+    <img class="cartier" src="{% static 'shop/images/cartier-ring.png' %}" width="322" height="170">
+</div>
+<div class="popular-products">
+
+    <div class="product-card">
+        <img src="{% static 'shop/images/ring-1.png' %}" alt="Product 1">
+        <h2>RING JOW’S, Cartier</h2>
+        <p>White gold, diamonds</p>
+        <h4>7990$</h4>
+    </div>
+
+    <div class="product-card">
+        <img src="{% static 'shop/images/necklace-1.png' %}" alt="Product 2">
+        <h2>NECKLACE ETOILE, HUBLOT</h2>
+        <p>White gold, diamonds</p>
+        <h4>6490$</h4>
+    </div>
+
+    <div class="product-card">
+        <img src="{% static 'shop/images/earrings-1.png' %}" alt="Product 2">
+        <h2>EARRINGS MOON, HUBLOT</h2>
+        <p>Yellow gold, sapphire</p>
+        <h4>5290$</h4>
+    </div>
+
+    <div class="product-card">
+        <img src="{% static 'shop/images/ring-2.png' %}" alt="Product 2">
+        <h2>RING CROIX, Cartier</h2>
+        <p>Yellow, white, rose gold</p>
+        <h4>4990$</h4>
+    </div>
+
+    <div class="product-card">
+        <img src="{% static 'shop/images/earrings-2.png' %}" alt="Product 2">
+        <h2>EARRINGS WIN, BLANCPAIN</h2>
+        <p>Yellow gold, pearl</p>
+        <h4>3890$</h4>
+    </div>
+</div>
+
+{% endblock %}
+
+
+

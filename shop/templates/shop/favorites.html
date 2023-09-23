@@ -1,0 +1,25 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+  <h1 class="favorites-h1">YOUR FAVORITES</h1>
+  <div class="favorites-container">
+    <ul class="favorites-list">
+      {% for favorite in favorites %}
+        <li class="favorite-item">
+          <div class="item-details">
+            <h2>{{ favorite.product.name }}</h2>
+            <img src="{{ favorite.product.image.url }}">
+            <p>Price: ${{ favorite.product.price }}</p>
+          </div>
+          <div class="item-actions-fav">
+            <a href="{% url 'shop:remove_from_favorite' favorite.id %}" class="remove-link-fav">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+          </div>
+        </li>
+      {% empty %}
+        <li class="no-fav-yet">You have no favorites yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

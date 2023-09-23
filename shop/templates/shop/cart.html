@@ -1,0 +1,50 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+  <h1 class="cart-h1">YOUR CART</h1>
+  <div class="cart-container">
+    <ul class="cart-list">
+      {% for item in cart_items %}
+        <li class="cart-item">
+          <div class="item-details">
+            <h2>{{ item.product.name }}</h2>
+            <img src="{{ item.product.image.url }}">
+            <p>Price: ${{ item.product.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+          </div>
+          <div class="item-actions">
+            <form method="post" action="{% url 'shop:update_cart' item.id %}">
+              {% csrf_token %}
+              <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+              <button type="submit"><i class="fas fa-sync"></i></button>
+            </form>
+            <a href="{% url 'shop:delete_from_cart' item.id %}" class="remove-link">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+          </div>
+        </li>
+      {% empty %}
+        <li class="empty-cart">Your cart is empty.</li>
+      {% endfor %}
+    </ul>
+    <div class="cart-summary">
+      <p>Total price: ${{ total_price }}</p>
+       {% if discount_amount %}
+         <p>Discount applied: ${{ discount_amount }}</p>
+       {% endif %}
+      <p>Promo Code Discount: ${{ promo_code_discount }}</p>
+      <form method="post" action="{% url 'shop:apply_promo_code' %}">
+        {% csrf_token %}
+        <input type="text" name="promo_code" placeholder="Enter promo code">
+        <button type="submit" class="enter-promo"><i class="fas fa-check apply-icon"></i></button>
+      </form>
+      <p>Final price: ${{ final_price }}</p>
+      <a href="{% url 'shop:view_orders' %}" class="order-history-link">View Order History</a>
+      <a href="{% url 'shop:create_order' %}" class="create-order-link">Create New Order</a>
+    </div>
+  </div>
+{% endblock %}
+
+
+
+

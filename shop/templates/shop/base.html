@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CelestialCrafts</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Imbue:opsz,wght@10..100,200;10..100,300&family=Playfair+Display+SC&display=swap" rel="stylesheet">
+    <link rel="icon" href="{% static 'shop/images/brilliant.png' %}" type="image/png">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logotype-left">
+                <a href="{% url 'home' %}">
+                    <img class="logo" src="{% static 'shop/images/brilliant.png' %}" alt="My Logo" width="50" height="50">
+
+                </a>
+                <a href="{% url 'home' %}"><h1>CELESTIALCRAFTS</h1></a>
+            </div>
+
+            <ul>
+                <li class="icon-list"><a href="{% url 'shop:favorites' %}"><i class="fas fa-heart icon-xs"></i></a></li>
+                {% if user.is_authenticated %}
+                    <li class="icon-list"><a href="{% url 'shop:view_cart' %}"><i class="fas fa-shopping-cart icon-xs"></i></a></li>
+                    <li class="icon-list"><a href="{% url 'shop:logout' %}"><i class="fas fa-sign-out-alt icon-xs"></i></a></li>
+                {% else %}
+                     <li class="icon-list"><a href="{% url 'shop:login' %}"><i class="fas fa-shopping-cart icon-xs"></i></a></li>
+                    <li class="icon-list"><a href="{% url 'shop:login' %}"><i class="fas fa-user icon-xs"></i></a></li>
+                {% endif %}
+                <li class="icon-list burger"><a href="{% url 'shop:products' %}"><i class="fas fa-bars icon-xs"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="left-section">
+            <ul class="contact-info">
+                <li class="icon-list"><a href="#"><i class="fas fa-phone icon-xs"></i> +77-77-77</a></li>
+                <a href="#"><img class="net" src="{% static 'shop/images/Instagram.png' %}" alt="Instagram"></a>
+                <a href="#"><img class="net" src="{% static 'shop/images/Facebook.png' %}" alt="Facebook"></a>
+            </ul>
+
+        </div>
+        <div class="center-section">
+            <p>&copy;2023 CELESTIALCRAFTS. ALL RIGHTS RESERVED.</p>
+        </div>
+        <div class="right-section">
+            <div class="app-stores">
+                <a href="#"><img class="store" src="{% static 'shop/images/ru_badge_web_generic 1.png' %}" alt="GooglePlay"></a>
+                <a href="#"><img class="store" src="{% static 'shop/images/apple-store-badge 1.png' %}" alt="App Store"></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+

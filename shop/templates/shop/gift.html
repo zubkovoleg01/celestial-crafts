@@ -1,0 +1,22 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="gift-container">
+        <h1 class="gift-title">Special Gifts and Discounts</h1>
+        <ul class="discount-list">
+            <li class="discount-item">
+                <h2 class="discount-title">5% Discount</h2>
+                <p class="discount-description">Get a 5% discount on orders over $10,000.</p>
+            </li>
+            <li class="discount-item">
+                <h2 class="discount-title">8% Discount</h2>
+                <p class="discount-description">Enjoy an 8% discount on orders over $25,000.</p>
+            </li>
+            <li class="discount-item">
+                <h2 class="discount-title">Promo Code Discount</h2>
+                <p class="discount-description">Use promo code <strong>NEW500</strong> to get a $500 discount on your new order.</p>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

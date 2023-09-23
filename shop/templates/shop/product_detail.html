@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="product-detail">
+    <a href="#" onclick="history.back();" class="back-button"><i class="fas fa-arrow-left"></i></a>
+    <h2 class="product-names">{{ product.name }}</h2>
+    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-image2">
+    <div class="product-info">
+        <p>Price: ${{ product.price }}</p>
+        <p>{{ product.description }}</p>
+         {% if user.is_authenticated %}
+            <form method="post" action="{% url 'shop:add_to_cart' product_id=product.id %}">
+              {% csrf_token %}
+              <button class="add-to-cart-btn-det" type="submit">ADD TO CART</button>
+            </form>
+        {% else %}
+            <p><a href="{% url 'shop:login' %}" class="login-link">Login</a> for add to shopping cart!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

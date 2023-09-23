@@ -1,0 +1,32 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+  <div class="order-history-container">
+    <h1 class="order-history-heading">Your Order History</h1>
+    {% if orders %}
+      <ul class="order-list-orders">
+        {% for order in orders %}
+          <li class="order-item">
+            <div class="order-details">
+              <p class="order-info">Order ID: {{ order.id }}</p>
+              <p class="order-info">Total Price: ${{ order.total_price }}</p>
+              <p class="order-info">Order Date: {{ order.created_at }}</p>
+            </div>
+            <div class="order-products">
+              <p class="products-heading-order">Products:</p>
+              <ul class="product-items-order">
+                {% for item in order.orderitem_set.all %}
+                  <li class="product-item-order">
+                    {{ item.product.name }} - Quantity: {{ item.quantity }}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="no-orders">You have no orders yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+

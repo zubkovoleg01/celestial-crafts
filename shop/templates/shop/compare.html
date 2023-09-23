@@ -1,0 +1,30 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+  <h1 class="compare-h1">COMPARISON</h1>
+  <div class="compare-container">
+    <ul class="compare-list">
+      {% for item in comparison_items %}
+        <li class="compare-item">
+          <div class="item-details-com">
+            <h2>{{ item.product.name }}</h2>
+            <img src="{{ item.product.image.url }}">
+            <p>Price: ${{ item.product.price }}</p>
+            <p>{{ item.product.description }}</p>
+          </div>
+          <div class="item-actions-com">
+            <a href="{% url 'shop:remove_from_comparison' item.id %}" class="remove-link-compare">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+            <form method="post" action="{% url 'shop:add_to_cart' product_id=item.product.id %}">
+              {% csrf_token %}
+              <button class="add-to-cart-btn-com" type="submit"><i class="fas fa-plus"></i></button>
+            </form>
+          </div>
+        </li>
+      {% empty %}
+        <li class="empty-com">Your comparison list is empty.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

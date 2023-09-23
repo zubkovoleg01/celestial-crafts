@@ -1,0 +1,57 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+  <h2 class="our-products">CATALOG</h2>
+  <form method="get" action="{% url 'shop:products' %}" class="filter-form">
+    <label for="category">Select Categories:</label>
+    <select name="category" multiple>
+      {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.name }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="min_price">Min Price:</label>
+    <input type="number" name="min_price">
+
+    <label for="max_price">Max Price:</label>
+    <input type="number" name="max_price">
+
+    <label for="sort_by">Sort By:</label>
+    <select name="sort_by">
+      <option value="name">Name</option>
+      <option value="price">Price</option>
+    </select>
+
+    <button type="submit">APPLY FILTERS</button>
+    <button type="button" onclick="window.location.href='{% url 'shop:compare' %}'"><i class="fas fa-balance-scale"></i></button>
+    <button type="button" class="gift" onclick="window.location.href='{% url 'shop:gifts' %}'">
+      <p>GET SALES <i class="fas fa-gift"></i></p>
+    </button>
+  </form>
+
+  <div class="product-list" enctype="multipart/form-data">
+    {% for product in products %}
+      <div class="product-item">
+        <h4>{{ product.name }}</h4>
+        <h4>{{ category.name }}</h4>
+        <p>Price: ${{ product.price }}</p>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
+        <button class="view-details-btn" onclick="window.location.href='{% url 'shop:product_detail' product.id %}'"><i class="fas fa-eye"></i></button>
+        <button class="compare-btn" onclick="window.location.href='{% url 'shop:add_to_comparison' product.id %}'"><i class="fas fa-balance-scale"></i></button>
+        <button class="favorites-btn" onclick="window.location.href='{% url 'shop:add_to_favorite' product.id %}'"><i class="fas fa-heart"></i></button>
+        {% if user.is_authenticated %}
+          <form method="post" action="{% url 'shop:add_to_cart' product_id=product.id %}">
+            {% csrf_token %}
+            <button class="add-to-cart-btn" type="submit"><i class="fas fa-plus"></i></button>
+          </form>
+        {% else %}
+          <form action="{% url 'shop:login' %}">
+            <button class="add-to-cart-btn" type="submit"><i class="fas fa-plus"></i></button>
+          </form>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
